@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Validate Custom Track</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel=icon href=assets/Log.ico type="image/png">
+</head>
+<body>
+  <div class="container">
+    <h1>Validate Custom Track</h1>
+    <h2>Upload your track file:</h2>
+    <input type="file" name="custom-track" id="custom-track" accept=".json">
+    <button onclick="validateCustomTrack()">Validate Track</button>
+    <div id="validation-results"></div>
+    <button onclick="goBack()">Go Back</button>
+    <a id="download-link" href="#" download="validated_track.json" style="display:none">Download Validated Track</a>
+  </div>
+
+  <!-- JSON validation script -->
+  <script src="scripts/validateData.js"></script>
+
+  <!-- Script for Go Back button -->
+  <script>
+    function goBack() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

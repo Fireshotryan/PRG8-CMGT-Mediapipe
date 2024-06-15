@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MusicTracked</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/Log.ico" type="image/png">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/control_utils/control_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose/pose.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- Camera video element -->
+    <video id="input_video"></video>
+
+    <!-- Main window -->
+    <div class="container">
+        <!-- Logo, score and settings -->
+        <div id="left_container">
+            <img src="assets/logo.png" id="logo">
+            <h1>score: <span id="score" style="color:white">0</span></h1>
+            <br><br>
+            <button onclick='openSettings()'>settings</button>
+            <br><br>
+            <!-- Model loading time display -->
+            <h2>Model loaded at: <span id="modelLoadingTime" style="color:white">loading</span></h2>
+        </div>
+
+        <!-- Game block -->
+        <div id="arrow_container">
+            <img src="assets/circles.png" style="position:absolute;bottom:0;left:0;width:100%;">
+            <div id="arrow_parent" style="display:contents"></div>
+        </div>
+
+        <!-- Video output -->
+        <div id="output_wrapper_wrapper">
+            <div id="output_wrapper">
+                <canvas id="output_canvas" width="1280" height="720"></canvas>
+            </div>
+            <h1>gesture: <span id="gesture" style="color:white">loading</span></h1>    
+        </div>
+    </div>
+
+    <!-- Song selection -->
+    <div id="select">
+        <h1>MusicTracked</h1>  
+        <h2>Select a song:</h2>
+        <div style="display:contents" id="song-button-container"></div>
+    </div>
+
+    <!-- Settings -->
+    <div id="settings">
+        <h1>settings</h1>
+        <hr>
+        <h2>graphics</h2>
+        <label for="cameraview">
+            <input type="checkbox" name="cameraview" id="cameraview" checked onchange="showCamera = this.checked">
+            Show Camera View
+        </label>
+        <br>
+        <label>Pose Estimation Accuracy</label>
+        <input type="range" min="0" max="2" value="1" class="slider" onchange="setPoseModelComplexity(parseInt(this.value))">
+        <hr>
+        <h2>motion</h2>
+        <label for="squatfordown">
+            <input type="checkbox" name="squatfordown" id="squatfordown" onchange="squatForDown = this.checked">
+            Squat for Down Motion
+        </label>
+        <label for="kickforlateral">
+            <input type="checkbox" name="kickforlateral" id="kickforlateral" onchange="kickForLateral = this.checked">
+            Kick for Lateral Motion
+        </label>
+        <hr>
+        <h2>audio</h2>
+        <label for="volume">Volume</label>
+        <input type="range" id="volume" name="volume" min="0" max="1" step="0.01" value="0.5" onchange="setVolume(this.value)">
+        <hr>
+        <h2>links</h2>
+        <a href="credits.html">credits</a>
+        <hr>
+        <a href="validate.html">validate</a>
+        <hr>
+        <a href="training.html">training</a>
+        <hr>
+
+        <button onclick='closeSettings()'>accept settings</button>
+    </div>
+
+    <!-- Custom Song -->
+    <div id="custom">
+        <h1>custom track</h1>
+        <hr>
+        <button onclick="location.href='record.html'">Record Custom Track</button>
+        <hr>
+        <h2>Upload music file:</h2>
+        <input type="file" name="custom-music" id="custom-music" accept=".wav,.mp3">
+        <h2>Upload track file:</h2>
+        <input type="file" name="custom-track" id="custom-track" accept=".json">
+        <hr>
+        <button onclick="playCustom()">Play</button>
+        <button onclick="closeCustom()">Cancel</button>
+    </div>
+
+    <!-- Audio -->
+    <audio id="track">
+        <source id="track-source" src="" type="audio/mp3">
+    </audio>
+
+    <!-- Pose estimation -->
+    <script src="scripts/pose.js"></script>
+
+    <!-- Song track files -->
+    <script src="songs/nobody.js"></script>
+    <script src="songs/abyss.js"></script>
+    <script src="songs/titanium.js"></script>
+
+    <script src="scripts/select.js"></script>
+
+    <!-- Dancing game -->
+    <script src="scripts/dancing.js"></script>
+
+    <!-- Splash screen -->
+    <div id="splash"></div>
+</body>
+</html>

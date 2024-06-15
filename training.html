@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Validate Custom Track</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js"></script>
+  <link rel=icon href=assets/Log.ico type="image/png">
+</head>
+<body>
+  <div class="button-container">
+    <button onclick="goBack()">Go Back</button>
+  </div>
+
+  <div class="container">
+    <h1 class="title">Training Page</h1>
+    <!-- Add your training content here -->
+
+    <!-- Training information section -->
+    <div class="columns">
+      <div class="column">
+        <div class="box training-info">
+          <h2 class="subtitle">Training Status</h2>
+          <p>Training progress:</p>
+          <div id="training-progress"></div> <!-- Container for training graph -->
+        </div>
+      </div>
+      <div class="column is-8">
+      </div>
+    </div>
+  </div>
+ 
+  <script src="scripts/training.js"></script>
+
+  <script>
+    function goBack() {
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>
